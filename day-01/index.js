@@ -12,10 +12,11 @@ function readExpenses() {
 
 function calcResultDay1A(expenses) {
   let result = [];
-  expenses.every(n => {
-    if (expenses.indexOf(2020 - n) >= 0) {
-      result.push(n);
-      result.push(2020 - n);
+  expenses.every(x => {
+    const y = 2020 - x;
+    if (expenses.indexOf(y) >= 0) {
+      result.push(x);
+      result.push(y);
       return false;
     }
   });
@@ -27,10 +28,11 @@ function calcResultDay1B(expenses) {
   let result = [];
   expenses.every((x, index) => {
     return expenses.slice(index + 1).every((y) => {
-      if (expenses.indexOf(2020 - x - y) >= 0) {
+      const z = 2020 - x - y;
+      if (expenses.indexOf(z) >= 0) {
         result.push(x);
         result.push(y);
-        result.push(2020 - x - y);
+        result.push(z);
         return false;
       }
 
