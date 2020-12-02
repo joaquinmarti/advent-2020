@@ -3,7 +3,7 @@ const fs = require('fs');
 function readExpenses() {
   return new Promise((resolve) => {
     fs.readFile(`./input.txt`, 'utf8', function (err, data) {
-      resolve(data.split('\n').map((n) => parseInt(n)).sort((a, b) => a - b));
+      resolve(data.split('\n').map((n) => parseInt(n)));
     })
   })
 }
@@ -18,6 +18,8 @@ function calcResultDay1A(expenses) {
       result.push(x, y);
       return false;
     }
+
+    return true;
   });
 
   return result;
