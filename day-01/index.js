@@ -29,7 +29,7 @@ function calcResultDay1B(expenses) {
   expenses.every((x, index) => {
     return expenses.slice(index + 1).every((y) => {
       const z = 2020 - x - y;
-      if (expenses.indexOf(z) >= 0) {
+      if (z >= 0 && expenses.indexOf(z) >= 0) {
         result.push(x);
         result.push(y);
         result.push(z);
