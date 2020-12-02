@@ -19,7 +19,7 @@ function readPasswords() {
 
 function calcResultDay2A(passwords) {
   return passwords.reduce((total, p) => {
-    const match = new RegExp(`${p.char}`, 'g');
+    const match = new RegExp(p.char, 'g');
     const count = (p.pass.match(match) || []).length;
 
     if (count >= p.first && count <= p.last) {
