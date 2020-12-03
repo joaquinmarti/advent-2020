@@ -19,10 +19,8 @@ function findTrees(map) {
         return total;
       }
 
-      // Back to the beginning of the string if position excedes the limit
-      if (position >= row.length) {
-        position = position - row.length;
-      }
+      // Ignore position values that excede row.length
+      position = position % row.length;
 
       const sumTree = row.charAt(position) === '#' ? 1 : 0;
 
