@@ -49,11 +49,7 @@ function calcResultDay4B(passports) {
         in: value => isBetween(value, 59, 76),
       };
 
-      if (!isUnitValid) {
-        return false;
-      }
-
-      return isHeightValid[unit](height)
+      return isUnitValid && isHeightValid[unit](height)
     },
     hcl: value => value.match(/^#[a-f0-9]{6}$/i),
     ecl: value => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
