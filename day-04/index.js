@@ -36,7 +36,7 @@ function calcResultDay4A(passports) {
 function calcResultDay4B(passports) {
   const isBetween = (value, min, max) => value >= min && value <= max;
   const mandatoryFields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
-  const validations = {
+  const validateField = {
     byr: value => isBetween(value, 1920, 2002),
     iyr: value => isBetween(value, 2010, 2020),
     eyr: value => isBetween(value, 2020, 2030),
@@ -55,7 +55,7 @@ function calcResultDay4B(passports) {
     ecl: value => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
     pid: value => value.match(/^\d{9}$/),
   };
-  const isValid = (passport) => mandatoryFields.reduce((acc, f) => acc && f in passport && validations[f](passport[f]), true);
+  const isValid = (passport) => mandatoryFields.reduce((acc, f) => acc && f in passport && validateField[f](passport[f]), true);
 
   return passports.filter(isValid).length;
 }
