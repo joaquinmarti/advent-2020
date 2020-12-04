@@ -29,7 +29,7 @@ function readPassports() {
 
 function calcResultDay4A(passports) {
   const mandatoryFields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
-  const isValid = (passport) => mandatoryFields.reduce((acc , f) => acc && f in passport, true);
+  const isValid = (passport) => mandatoryFields.every(f => f in passport);
   return passports.filter(isValid).length;
 }
 
@@ -55,7 +55,7 @@ function calcResultDay4B(passports) {
     ecl: value => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(value),
     pid: value => value.match(/^\d{9}$/),
   };
-  const isValid = (passport) => mandatoryFields.reduce((acc, f) => acc && f in passport && validateField[f](passport[f]), true);
+  const isValid = (passport) => mandatoryFields.every(f => f in passport && validateField[f](passport[f]));
 
   return passports.filter(isValid).length;
 }
