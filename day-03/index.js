@@ -12,23 +12,7 @@ function readMap() {
 
 function findTrees(map) {
   return function(right, down) {
-    let position = 0;
-    return map.reduce((total, row, index) => {
-      // Avoid processing rows depending on the "down" value
-      if (index % down !== 0) {
-        return total;
-      }
-
-      // Ignore position values that excede row.length
-      position = position % row.length;
-
-      const sumTree = row.charAt(position) === '#' ? 1 : 0;
-
-      //
-      position = position + right;
-
-      return total + sumTree;
-    }, 0);
+    return map.filter((row, index) => index % down === 0 && row[index * right / down % row.length] === '#').length;
   }
 }
 
