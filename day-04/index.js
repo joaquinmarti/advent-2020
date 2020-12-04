@@ -34,19 +34,19 @@ function calcResultDay4A(passports) {
 }
 
 function calcResultDay4B(passports) {
-  const isBetween = (value) => (min, max) => value >= min && value <= max;
+  const isBetween = (value, min, max) => value >= min && value <= max;
   const mandatoryFields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
   const validations = {
-    byr: value => isBetween(value)(1920, 2002),
-    iyr: value => isBetween(value)(2010, 2020),
-    eyr: value => isBetween(value)(2020, 2030),
+    byr: value => isBetween(value, 1920, 2002),
+    iyr: value => isBetween(value, 2010, 2020),
+    eyr: value => isBetween(value, 2020, 2030),
     hgt: (value) => {
       const unit = value.slice(-2);
       const height = value.slice(0, value.length - 2);
       const isUnitValid = ['cm', 'in'].includes(unit);
       const isHeightValid = {
-        cm: value => isBetween(value)(150, 193),
-        in: value => isBetween(value)(59, 76),
+        cm: value => isBetween(value, 150, 193),
+        in: value => isBetween(value, 59, 76),
       };
 
       if (!isUnitValid) {
