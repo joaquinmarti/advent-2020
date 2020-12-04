@@ -21,22 +21,15 @@ function calcResultDay2A(passwords) {
   return passwords.reduce((total, p) => {
     const match = new RegExp(p.char, 'g');
     const count = (p.pass.match(match) || []).length;
-
-    if (count >= p.first && count <= p.last) {
-      return ++total;
-    }
-
-    return total;
+    const sumPass = count >= p.first && count <= p.last ? 1: 0;
+    return total + sumPass;
   }, 0);
 }
 
 function calcResultDay2B(passwords) {
   return passwords.reduce((total, p) => {
-    if (p.pass.charAt(p.first - 1) === p.char ^ p.pass.charAt(p.last - 1) === p.char) {
-      return ++total;
-    }
-
-    return total;
+    const sumPass = p.pass.charAt(p.first - 1) === p.char ^ p.pass.charAt(p.last - 1) === p.char ? 1 : 0;
+    return total + sumPass;
   }, 0);
 }
 
