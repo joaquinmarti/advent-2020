@@ -32,7 +32,7 @@ function calcResultDay5A(bps) {
 function calcResultDay5B(bps) {
   return bps.map((bp) => calcID(...sliceBP(bp)))
   .sort((a, b) => a - b)
-  .reduce((missingID, id, index, ids) => id - ids[index - 1] > 1 ? id - 1 : missingID, 0);
+  .find((id, index, ids) => id - ids[index - 1] > 1) - 1;
 }
 
 async function start() {
