@@ -31,12 +31,12 @@ function calcResultDay5A(bps) {
 }
 
 function calcResultDay5B(bps) {
-  const ids = bps.map((bp) => {
+  return bps.map((bp) => {
     const [row, column] = sliceBP(bp);
     return calcID(row, column);
-  }).sort((a, b) => a - b);
-
-  return ids.reduce((missingID, id, index, ids) => id - ids[index - 1] > 1 ? id - 1 : missingID, 0);
+  })
+  .sort((a, b) => a - b)
+  .reduce((missingID, id, index, ids) => id - ids[index - 1] > 1 ? id - 1 : missingID, 0);
 }
 
 async function start() {
