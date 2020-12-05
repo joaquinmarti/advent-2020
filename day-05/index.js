@@ -24,17 +24,13 @@ function calcID(row, column) {
 
 function calcResultDay5A(bps) {
   return bps.reduce((highest, bp) => {
-    const [row, column] = sliceBP(bp);
-    const id = calcID(row, column);
+    const id = calcID(...sliceBP(bp));
     return id > highest ? id : highest;
   }, 0);
 }
 
 function calcResultDay5B(bps) {
-  return bps.map((bp) => {
-    const [row, column] = sliceBP(bp);
-    return calcID(row, column);
-  })
+  return bps.map((bp) => calcID(...sliceBP(bp)))
   .sort((a, b) => a - b)
   .reduce((missingID, id, index, ids) => id - ids[index - 1] > 1 ? id - 1 : missingID, 0);
 }
