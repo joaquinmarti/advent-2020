@@ -10,27 +10,19 @@ function readBoardingPasses() {
 
 //
 
-function sliceBP(bp) {
-  return [bp.slice(0, 7), bp.slice(-3)];
-}
-
-function calcID(row, column) {
-  const rowNumber = parseInt(row.replace(/F/g, '0').replace(/B/g, '1'), 2);
-  const columnNumber = parseInt(column.replace(/L/g, '0').replace(/R/g, '1'), 2);
-  return rowNumber * 8 + columnNumber;
-}
+const calcID = (bp) => parseInt(bp.replace(/F|L/g, '0').replace(/B|R/g, '1'), 2);
 
 //
 
 function calcResultDay5A(bps) {
   return bps.reduce((highest, bp) => {
-    const id = calcID(...sliceBP(bp));
+    const id = calcID(bp);
     return id > highest ? id : highest;
   }, 0);
 }
 
 function calcResultDay5B(bps) {
-  return bps.map((bp) => calcID(...sliceBP(bp)))
+  return bps.map((bp) => calcID(bp))
   .sort((a, b) => a - b)
   .find((id, index, ids) => id - ids[index - 1] > 1) - 1;
 }
