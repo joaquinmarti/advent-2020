@@ -25,10 +25,10 @@ function calcResultDay6A(input) {
 
 function calcResultDay6B(input) {
   return input.reduce((total, group) => {
-    const singature = group.join('');
+    const signature = group.join('');
 
-    return total + [...new Set(singature.split(''))].filter((letter) => {
-      return singature.match(new RegExp(letter, 'g')).length === group.length;
+    return total + [...new Set(signature.split(''))].filter((letter) => {
+      return signature.match(new RegExp(letter, 'g')).length === group.length;
     }).length;
   }, 0);
 }
