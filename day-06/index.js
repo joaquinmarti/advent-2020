@@ -28,8 +28,7 @@ function calcResultDay6B(input) {
     const singature = group.join('');
 
     return total + [...new Set(singature.split(''))].filter((letter) => {
-      const match = new RegExp(letter, 'g');
-      return (singature.match(match) || []).length === group.length;
+      return singature.match(new RegExp(letter, 'g')).length === group.length;
     }).length;
   }, 0);
 }
