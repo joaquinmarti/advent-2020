@@ -25,14 +25,12 @@ function calcResultDay6A(input) {
 
 function calcResultDay6B(input) {
   return input.reduce((total, group) => {
-    const join = group.join('');
+    const singature = group.join('');
 
-    const groupValue = [...new Set(join.split(''))].reduce((total, letter) => {
+    return total + [...new Set(singature.split(''))].reduce((total, letter) => {
       const match = new RegExp(letter, 'g');
-      return total + ((join.match(match) || []).length === group.length ? 1 : 0);
+      return total + ((singature.match(match) || []).length === group.length ? 1 : 0);
     }, 0);
-
-    return total + groupValue;
   }, 0);
 }
 
