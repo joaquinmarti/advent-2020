@@ -13,14 +13,7 @@ function readInput() {
 //
 
 function calcResultDay6A(input) {
-  return input.reduce((total, group) => {
-    const yesCount = [];
-    group.forEach(questions => {
-      yesCount.push(...questions.split('').filter(letter => !~yesCount.indexOf(letter)));
-    });
-
-    return total + yesCount.length;
-  }, 0);
+  return input.reduce((total, group) => total + new Set(group.join('').split('')).size, 0);
 }
 
 function calcResultDay6B(input) {
