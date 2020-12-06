@@ -18,19 +18,14 @@ function readPasswords() {
 }
 
 function calcResultDay2A(passwords) {
-  return passwords.reduce((total, p) => {
-    const match = new RegExp(p.char, 'g');
-    const count = (p.pass.match(match) || []).length;
-    const sumPass = count >= p.first && count <= p.last ? 1: 0;
-    return total + sumPass;
-  }, 0);
+  return passwords.filter((p) => {
+    const count = (p.pass.match(new RegExp(p.char, 'g')) || []).length;
+    return count >= p.first && count <= p.last;
+  }).length;
 }
 
 function calcResultDay2B(passwords) {
-  return passwords.reduce((total, p) => {
-    const sumPass = p.pass.charAt(p.first - 1) === p.char ^ p.pass.charAt(p.last - 1) === p.char ? 1 : 0;
-    return total + sumPass;
-  }, 0);
+  return passwords.filter((p) => p.pass[p.first - 1] === p.char ^ p.pass[p.last - 1] === p.char).length;
 }
 
 
