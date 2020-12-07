@@ -51,7 +51,7 @@ function calcResultDay5A(input) {
 }
 
 function calcResultDay5B(input) {
-  let individual = 0;
+  let totalBags = 0;
 
   //
   function getBagsForChild(bag, child) {
@@ -64,20 +64,20 @@ function calcResultDay5B(input) {
 
   function calcTotalBags(bag, parentBags) {
     findChildren(bag).forEach((child) => {
-      const totalBags = parentBags * getBagsForChild(bag, child)
+      const totalBagsForChild = parentBags * getBagsForChild(bag, child)
 
       //
-      individual += totalBags;
+      totalBags += totalBagsForChild;
 
       //
-      calcTotalBags(child.bag, totalBags);
+      calcTotalBags(child.bag, totalBagsForChild);
     });
   }
 
   //
   calcTotalBags('shiny gold', 1);
 
-  return individual;
+  return totalBags;
 }
 
 async function start() {
