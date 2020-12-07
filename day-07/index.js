@@ -25,7 +25,7 @@ function readInput() {
 
 //
 
-function calcResultDay5A(input) {
+function calcResultDayA(input) {
   const nodesVisited = [];
 
   function findParents(bagToFind, allBags) {
@@ -50,7 +50,7 @@ function calcResultDay5A(input) {
   return nodesVisited.length;
 }
 
-function calcResultDay5B(input) {
+function calcResultDayB(input) {
   function getBagsForChild(bag, bagToFind, allBags) {
     return allBags[bag].find((childBag) => childBag.bag === bagToFind).number;
   }
@@ -64,13 +64,13 @@ function calcResultDay5B(input) {
 
     function calcChildrenBags(bag, parentBags) {
       findChildren(bag).forEach((child) => {
-        const totalBagsForChild = parentBags * getBagsForChild(bag, child.bag, allBags)
+        const bagsForChild = parentBags * getBagsForChild(bag, child.bag, allBags)
 
         //
-        totalBags += totalBagsForChild;
+        totalBags += bagsForChild;
 
         //
-        calcChildrenBags(child.bag, totalBagsForChild);
+        calcChildrenBags(child.bag, bagsForChild);
       });
     }
 
@@ -86,8 +86,8 @@ function calcResultDay5B(input) {
 
 async function start() {
   const input = await readInput();
-  console.log(calcResultDay5A(input));
-  console.log(calcResultDay5B(input));
+  console.log(calcResultDayA(input));
+  console.log(calcResultDayB(input));
 }
 
 start();
