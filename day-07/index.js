@@ -51,8 +51,8 @@ function calcResultDay5A(input) {
 }
 
 function calcResultDay5B(input) {
-  function getBagsForChild(bag, child, allBags) {
-    return allBags[bag].find((childBag) => childBag.bag === child.bag).number;
+  function getBagsForChild(bag, bagToFind, allBags) {
+    return allBags[bag].find((childBag) => childBag.bag === bagToFind).number;
   }
 
   function findChildren(bag) {
@@ -64,7 +64,7 @@ function calcResultDay5B(input) {
 
     function calcChildrenBags(bag, parentBags) {
       findChildren(bag).forEach((child) => {
-        const totalBagsForChild = parentBags * getBagsForChild(bag, child, allBags)
+        const totalBagsForChild = parentBags * getBagsForChild(bag, child.bag, allBags)
 
         //
         totalBags += totalBagsForChild;
