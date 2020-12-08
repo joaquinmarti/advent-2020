@@ -7,7 +7,7 @@ function readInput() {
         const [name, parameter] = i.split(' ');
         return {
           name,
-          parameter
+          parameter: parseInt(parameter),
         }
       }));
     })
@@ -25,10 +25,10 @@ function calcAcc(input) {
     if (command) {
       switch (command.name) {
         case 'jmp':
-          pointer += parseInt(command.parameter);
+          pointer += command.parameter;
           break;
         case 'acc':
-          acc += parseInt(command.parameter);
+          acc += command.parameter;
         default:
           pointer += 1;
       }
