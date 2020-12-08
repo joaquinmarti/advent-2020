@@ -58,7 +58,7 @@ function changeCommand(input) {
     };
 
     const indexToChange = commands.findIndex((i, index) => {
-      return ((i.name === 'nop' && i.parameter !== '+0') || i.name === 'jmp') && index > changed;
+      return ((i.name === 'nop' && i.parameter !== 0) || i.name === 'jmp') && index > changed;
     });
 
     if (~indexToChange) {
