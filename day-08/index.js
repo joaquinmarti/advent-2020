@@ -46,11 +46,11 @@ function calcAcc(input) {
   ];
 }
 
-function changeCommand(input) {
+function* changeCommand(input) {
   let changed = -1;
 
-  return function () {
-    const commands = input.map(c => ({...c})); // Clone array avoiding references to objects
+  while (true) {
+    const commands = input.map(c => ({ ...c })); // Clone array avoiding references to objects
 
     const replaceCommand = {
       'nop': 'jmp',
@@ -66,7 +66,7 @@ function changeCommand(input) {
       changed = indexToChange;
     }
 
-    return commands;
+    yield commands;
   }
 }
 
@@ -83,7 +83,7 @@ function calcResultB(input) {
   let acc = 0;
 
   while (lastCommand !== commandIndexToTerminate) {
-    [acc, lastCommand] = calcAcc(executeCommandsChange());
+    [acc, lastCommand] = calcAcc(executeCommandsChange.next().value);
   }
 
   return acc;
