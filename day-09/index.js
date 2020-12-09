@@ -37,15 +37,15 @@ function calcResultB(input) {
   const result = [];
 
   initialLoop: for (let x = 0; x < input.length; x++) {
-    contigiousLoop: for (let y = x + 1; y < input.length; y++) {
+    contiguousLoop: for (let y = x + 1; y < input.length; y++) {
       let numbersToSum = input.slice(x, y);
-      let sumContigious = sumArray(numbersToSum);
+      let sumContiguous = sumArray(numbersToSum);
 
-      if (sumContigious > numberToFind) {
-        break contigiousLoop;
+      if (sumContiguous > numberToFind) {
+        break contiguousLoop;
       }
 
-      if (sumContigious === numberToFind) {
+      if (sumContiguous === numberToFind) {
         result.push(...numbersToSum);
         break initialLoop;
       }
