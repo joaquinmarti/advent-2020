@@ -34,6 +34,7 @@ function calcResultA(input) {
 function calcResultB(input) {
   let totalBranches = 1;
 
+  // Add root node
   const allNodes = [0, ...input];
 
   allNodes.reduce((nodes, jolt, index) => {
@@ -41,16 +42,16 @@ function calcResultB(input) {
 
     // Count the occurrences of each node
     connectable.forEach((child) => {
-      nodes[child.toString()] = (nodes[child.toString()] || 0) + nodes[jolt.toString()];
+      nodes[child] = (nodes[child] || 0) + nodes[jolt];
     });
 
     // Increase the branchs number when node has more than one child
     if (connectable.length > 1) {
-      totalBranches += nodes[jolt.toString()] * (connectable.length - 1);
+      totalBranches += nodes[jolt] * (connectable.length - 1);
     }
 
     return nodes;
-  }, {'0': 1}); // 0 is the starting node
+  }, {0: 1}); // 0 is the starting node
 
   return totalBranches;
 }
