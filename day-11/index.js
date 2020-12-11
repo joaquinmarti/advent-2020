@@ -8,9 +8,9 @@ function readInput() {
   })
 }
 
-// A
+//
 
-function countAdjacentOccupied(seatsLayout, x, y) {
+function countAdjacent(seatsLayout, x, y) {
   const previousColumn = y > 0 ? y - 1 : 0;
   const nextColumn = y < seatsLayout[0].length - 1 ? y + 2 : y + 1; // + 2 because we use it in slice function later
 
@@ -31,34 +31,13 @@ function countAdjacentOccupied(seatsLayout, x, y) {
   return seats.filter(s => s === '#').length;
 }
 
-
-function changeRound(seatsLayout) {
-  const newLayout = copyLayout(seatsLayout);
-
-  for (let x = 0; x < seatsLayout.length; x++) {
-    for (let y = 0; y < seatsLayout[x].length; y++) {
-      let occupied = countAdjacentOccupied(seatsLayout, x, y);
-
-      if (seatsLayout[x][y] === 'L' && occupied === 0) {
-        newLayout[x][y] = '#';
-      } else if (seatsLayout[x][y] === '#' && occupied >= 4) {
-        newLayout[x][y] = 'L';
-      }
-    }
-  }
-
-  return newLayout;
-}
-
-// B
-
-function countDiagonalOccupied(seatsLayout, x, y) {
+function countDiagonal(seatsLayout, x, y) {
   const rowsNumber = seatsLayout.length - 1;
   const colsNumber = seatsLayout[0].length - 1;
 
   // Calculate directions
   const up = [...Array(x).keys()].map((z => [z, y])).reverse();
-  const down = [...Array(rowsNumber - x).keys()].map((z => [x + z + 1 , y]));
+  const down = [...Array(rowsNumber - x).keys()].map((z => [x + z + 1, y]));
   const left = [...Array(y).keys()].map((z => [x, z])).reverse();
   const right = [...Array(colsNumber - y).keys()].map((z => [x, y + z + 1]));
   const upleft = [...Array(Math.min(x, y)).keys()].map((z => [x - z - 1, y - z - 1]));
@@ -82,18 +61,17 @@ function countDiagonalOccupied(seatsLayout, x, y) {
   }).length;
 }
 
-function changeRoundDiagonal(seatsLayout) {
+function round(seatsLayout, countOccupied, threshold) {
   const newLayout = copyLayout(seatsLayout);
 
   for (let x = 0; x < seatsLayout.length; x++) {
     for (let y = 0; y < seatsLayout[x].length; y++) {
-      let occupied = countDiagonalOccupied(seatsLayout, x, y);
+      let occupied = countOccupied(seatsLayout, x, y);
 
       if (seatsLayout[x][y] === 'L' && occupied === 0) {
         newLayout[x][y] = '#';
-      } else if (seatsLayout[x][y] === '#' && occupied >= 5) {
+      } else if (seatsLayout[x][y] === '#' && occupied >= threshold) {
         newLayout[x][y] = 'L';
-      } else {
       }
     }
   }
@@ -117,14 +95,14 @@ function countLayoutSeats(serializedLayout) {
 
 //
 
-function calcResultA(input) {
+function processLayouts(seatsLayout, countOccupied, threshold) {
   const serializedLayouts = [];
   let repeated = false;
-  let layout = copyLayout(input);
+  let layout = copyLayout(seatsLayout);
   let serialized = '';
 
   while (!repeated) {
-    layout = changeRound(layout);
+    layout = round(layout, countOccupied, threshold);
     serialized = serializeLayout(layout);
 
     if (~serializedLayouts.indexOf(serialized)) {
@@ -137,24 +115,14 @@ function calcResultA(input) {
   return countLayoutSeats(serializedLayouts[serializedLayouts.length - 1]);
 }
 
+//
+
+function calcResultA(input) {
+  return processLayouts(input, countAdjacent, 4);
+}
+
 function calcResultB(input) {
-  const serializedLayouts = [];
-  let repeated = false;
-  let layout = copyLayout(input);
-  let serialized = '';
-
-  while (!repeated) {
-    layout = changeRoundDiagonal(layout);
-    serialized = serializeLayout(layout);
-
-    if (~serializedLayouts.indexOf(serialized)) {
-      repeated = true;
-    }
-
-    serializedLayouts.push(serialized);
-  }
-
-  return countLayoutSeats(serializedLayouts[serializedLayouts.length - 1]);
+  return processLayouts(input, countDiagonal, 5);
 }
 
 async function start() {
