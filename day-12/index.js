@@ -73,7 +73,7 @@ function calcResultA(input) {
     const [action, value] = command;
 
     switch(action) {
-      case  'N':
+      case 'N':
       case 'S':
       case 'E':
       case 'W':
