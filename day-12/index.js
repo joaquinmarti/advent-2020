@@ -95,7 +95,7 @@ function calcResultA(input) {
 }
 
 function calcResultB(input) {
-  const { ship } = input.reduce((navigation, command) => {
+  const { ship: { lat, long } } = input.reduce((navigation, command) => {
     let [action, value] = command;
 
     switch (action) {
@@ -126,8 +126,7 @@ function calcResultB(input) {
     },
   });
 
-  return Math.abs(ship.lat) + Math.abs(ship.long);
-
+  return Math.abs(lat) + Math.abs(long);
 }
 
 async function start() {
