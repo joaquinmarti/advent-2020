@@ -100,7 +100,7 @@ function calcResultA(input) {
 }
 
 function calcResultB(input) {
-  // Caclc the number using brute force, don't do this! Works fine on small examples but it will burn
+  // Calc the number using brute force, don't do this! Works fine on small examples but it will burn
   // your processor on the real input.
   // return bruteForce(input);
 
