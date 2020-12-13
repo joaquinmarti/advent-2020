@@ -62,24 +62,10 @@ function calcTimestamp(input) {
 
     while(!found) {
       if (bus !== 'x') {
-        // console.log('-------------------------');
-        // console.log('bus', bus);
-        // console.log('counter', counter);
-        // console.log('index + 1', index + 1);
-        // console.log('counter', counter);
-        // console.log('mod', (counter + index + 1) % bus === 0);
-        // console.log('--');
-
         if ((counter + index + 1) % bus === 0) {
-          // console.log('multiply!');
-          // console.log('now', now);
-          // console.log('now', bus);
-          // console.log('now * bus', now * bus);
           now = now * bus;
           found = true;
         } else {
-          // console.log('counter', counter);
-          // console.log('counter + now', counter + now);
           counter = counter + now;
         }
       }
