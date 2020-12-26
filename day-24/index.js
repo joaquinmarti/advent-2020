@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function readInput() {
   return new Promise((resolve) => {
-    fs.readFile(`./input.txt`, 'utf8', function (err, data) {
+    fs.readFile(`./input-2.txt`, 'utf8', function (err, data) {
       resolve(data.split('\n'));
     })
   })
@@ -49,9 +49,7 @@ function inc(index) {
   return index + 50; // The starting point in the hex grid: (50, 50)
 }
 
-//
-
-function calcResultA(input) {
+function initialTilesSetup(input) {
   const tiles = [];
 
   input.forEach((instructions) => {
@@ -68,13 +66,36 @@ function calcResultA(input) {
     tiles[inc(tileToFlip[0])][inc(tileToFlip[1])] = !tiles[inc(tileToFlip[0])][inc(tileToFlip[1])];
   });
 
+  return tiles;
+}
+
+function countBlackTiles(tiles) {
   return tiles.reduce((total, tileRow) => {
     return total + tileRow.filter(tile => tile === true).length;
   }, 0);
 }
 
-function calcResultB(input) {
+//
 
+function transformTiles(tiles) {
+  return tiles;
+}
+
+//
+
+function calcResultA(input) {
+  const tiles = initialTilesSetup(input);
+  return countBlackTiles(tiles);
+}
+
+function calcResultB(input) {
+  let tiles = initialTilesSetup(input);
+
+  for (let index = 0; index < 5; index++) {
+    tiles = transformTiles(tiles);
+  }
+
+  return countBlackTiles(tiles);
 }
 
 async function start() {
