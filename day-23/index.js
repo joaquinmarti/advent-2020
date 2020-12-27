@@ -72,23 +72,6 @@ function changeReferences(cups, currentIndex = 0) {
   return [cups, current];
 }
 
-function buildString(cups, currentIndex) {
-  const next1 = cups[currentIndex];
-  const next2 = cups[next1];
-  const next3 = cups[next2];
-  const next4 = cups[next3];
-  const next5 = cups[next4];
-  const next6 = cups[next5];
-  const next7 = cups[next6];
-  const next8 = cups[next7];
-  const next9 = cups[next8];
-
-  const finalCups = `${next1}${next2}${next3}${next4}${next5}${next6}${next7}${next8}${next9}`;
-
-  const indexOf1 = finalCups.indexOf(1);
-  return finalCups.substr(indexOf1 + 1) + finalCups.substr(0, indexOf1);
-}
-
 function findNextCups(cups) {
   const next1 = cups[1];
   const next2 = cups[next1];
